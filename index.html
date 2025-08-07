@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Report - Saima Zulfiqar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .tab-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        .tab-nav {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+            overflow-x: auto;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 18px 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #6c757d;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tab-button:hover {
+            background: #e9ecef;
+            color: #495057;
+        }
+
+        .tab-button.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+            background: white;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 30px;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .info-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .info-card p {
+            margin-bottom: 8px;
+        }
+
+        .info-card strong {
+            color: #2c3e50;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        th, td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+        }
+
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #667eea, #764ba2);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -37px;
+            top: 25px;
+            width: 12px;
+            height: 12px;
+            background: #667eea;
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        .timeline-item h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .alert {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 5px solid;
+        }
+
+        .alert-info {
+            background: #e3f2fd;
+            border-color: #2196f3;
+            color: #0d47a1;
+        }
+
+        .alert-success {
+            background: #e8f5e8;
+            border-color: #4caf50;
+            color: #2e7d32;
+        }
+
+        .alert-warning {
+            background: #fff3e0;
+            border-color: #ff9800;
+            color: #e65100;
+        }
+
+        .question-list {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .question-list h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .question-list ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .question-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #dee2e6;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .question-list li::before {
+            content: '❓';
+            position: absolute;
+            left: 0;
+            top: 10px;
+        }
+
+        .simplified-card {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            color: #2d3436;
+        }
+
+        .progress-bar {
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 8px;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .emoji {
+            font-size: 1.2em;
+            margin-right: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .tab-content {
+                padding: 20px;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            th, td {
+                padding: 10px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🩺 Comprehensive Medical Report</h1>
+            <p><strong>Patient:</strong> Saima Zulfiqar | <strong>Diagnosis:</strong> Invasive Ductal Carcinoma (Triple Negative) | <strong>Date:</strong> August 2025</p>
+        </header>
+
+        <div class="tab-container">
+            <nav class="tab-nav">
+                <button class="tab-button active" data-tab="overview">📋 Overview</button>
+                <button class="tab-button" data-tab="diagnosis">🔬 Diagnosis Types</button>
+                <button class="tab-button" data-tab="treatment">💊 Treatment Plan</button>
+                <button class="tab-button" data-tab="prognosis">📈 Prognosis</button>
+                <button class="tab-button" data-tab="timeline">⏰ Timeline</button>
+                <button class="tab-button" data-tab="simplified">👶 For Family</button>
+                <button class="tab-button" data-tab="questions">❓ Questions</button>
+            </nav>
+
+            <!-- Patient Overview Tab -->
+            <div class="tab-content active" id="overview">
+                <h2>🔍 Patient Overview</h2>
+                
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>Patient Information</h3>
+                        <p><strong>Name:</strong> Saima Zulfiqar</p>
+                        <p><strong>Age:</strong> 45 years old</p>
+                        <p><strong>Ethnicity:</strong> British Pakistani</p>
+                        <p><strong>Date of Diagnosis:</strong> August 2025</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>Confirmed Diagnosis</h3>
+                        <p><strong>Type:</strong> Invasive Ductal Carcinoma (IDC)</p>
+                        <p><strong>Location:</strong> Right Breast</p>
+                        <p><strong>Receptor Status:</strong> Triple Negative (ER-, PR-, HER2-)</p>
+                        <p><strong>Grade:</strong> Grade III (high-grade tumour)</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>Staging Information</h3>
+                        <p><strong>Stage:</strong> Stage II</p>
+                        <p><strong>Tumour Size:</strong> 4.6 cm (46 mm)</p>
+                        <p><strong>Lymph Node Involvement:</strong> 2 axillary lymph nodes (positive)</p>
+                        <p><strong>Distant Metastasis:</strong> None on CT scan</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>Additional Findings</h3>
+                        <p><strong>Other:</strong> Small benign kidney cyst</p>
+                        <p><strong>CT Scan:</strong> Clear - no metastases</p>
+                        <p><strong>Overall Status:</strong> Localized disease</p>
+                    </div>
+                </div>
+
+                <div class="alert alert-success">
+                    <strong>✅ Key Positive Indicators:</strong> Early detection, no distant spread on CT scan, and treatable cancer type with established treatment protocols.
+                </div>
+            </div>
+
+            <!-- Diagnosis Types Tab -->
+            <div class="tab-content" id="diagnosis">
+                <h2>🔬 Breast Cancer Types Comparison</h2>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Subtype</th>
+                            <th>Description</th>
+                            <th>Typical Features</th>
+                            <th>Treatment Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: #e3f2fd;">
+                            <td><strong>Triple Negative (TNBC)</strong><br><em>⭐ Current Diagnosis</em></td>
+                            <td>Lacks all three major receptors (ER, PR, HER2).</td>
+                            <td>Aggressive, higher early recurrence risk, chemo-sensitive</td>
+                            <td>Chemotherapy is primary treatment, surgery, radiation</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hormone-Positive (ER+/PR+)</strong></td>
+                            <td>Most common type. Cancer cells grow in response to estrogen or progesterone.</td>
+                            <td>Often slow-growing, common in post-menopausal women</td>
+                            <td>Surgery, radiation, hormonal therapy, ± chemotherapy</td>
+                        </tr>
+                        <tr>
+                            <td><strong>HER2-Positive</strong></td>
+                            <td>Overexpression of HER2 protein causes rapid cell growth.</td>
+                            <td>Aggressive but highly treatable with targeted therapy</td>
+                            <td>Surgery, chemotherapy, radiation, Herceptin (trastuzumab)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Inflammatory Breast Cancer (IBC)</strong></td>
+                            <td>Rare, aggressive, with skin involvement.</td>
+                            <td>Redness, swelling, warmth, no distinct lump</td>
+                            <td>Chemotherapy first, followed by surgery and radiation</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lobular Carcinoma</strong></td>
+                            <td>Begins in lobules rather than ducts.</td>
+                            <td>Can be difficult to detect on mammograms</td>
+                            <td>Similar to IDC treatment depending on stage/receptors</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ductal Carcinoma In Situ (DCIS)</strong></td>
+                            <td>Non-invasive; early form limited to milk ducts.</td>
+                            <td>Often detected via screening</td>
+                            <td>Surgery and radiation, sometimes hormone therapy</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="alert alert-info">
+                    <strong>ℹ️ About Triple Negative Breast Cancer:</strong> This subtype represents about 15-20% of all breast cancers. While it tends to be more aggressive, it also responds well to chemotherapy, and many patients achieve excellent outcomes with proper treatment.
+                </div>
+            </div>
+
+            <!-- Treatment Plan Tab -->
+            <div class="tab-content" id="treatment">
+                <h2>💊 Comprehensive Treatment Plan</h2>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>🧪 A. Neoadjuvant Chemotherapy (First Stage)</h4>
+                        <p><strong>Goal:</strong> Shrink tumour before surgery; improve surgical outcomes; address microscopic disease</p>
+                        <p><strong>Duration:</strong> ~6 months (6–8 cycles, ~3 weeks apart)</p>
+                        <p><strong>Likely Regimen:</strong></p>
+                        <ul>
+                            <li>Anthracyclines (e.g., Doxorubicin)</li>
+                            <li>Taxanes (e.g., Paclitaxel)</li>
+                            <li>Possibly Carboplatin (commonly used for TNBC)</li>
+                        </ul>
+                        <p><strong>Delivery:</strong> IV infusion via central line or PICC line</p>
+                        <p><strong>Expected Effects:</strong> Tumour shrinkage, possible complete response in some TNBC cases</p>
+                        
+                        <div class="alert alert-warning">
+                            <strong>Expected Side Effects:</strong> Hair loss, nausea, fatigue, early menopause, lowered immune system, risk of infection
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h4>🏥 B. Surgical Intervention (Post-Chemotherapy)</h4>
+                        <p><strong>Planned Surgery:</strong> Lumpectomy (if tumour responds well); possible mastectomy if not</p>
+                        <p><strong>Lymph Node Surgery:</strong> Axillary node clearance at same time</p>
+                        <p><strong>Goals:</strong> Remove residual tumour and all involved lymphatic tissue</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h4>⚡ C. Radiotherapy (Post-Surgery)</h4>
+                        <p><strong>Indicated due to:</strong> Node-positive disease and breast-conserving surgery</p>
+                        <p><strong>Course:</strong> 3 weeks of daily treatment (Mon–Fri)</p>
+                        <p><strong>Purpose:</strong> Destroy any residual cancer cells in the breast or chest wall</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h4>🧬 D. Genetic Testing (BRCA1/2 and others)</h4>
+                        <p><strong>Recommended due to:</strong></p>
+                        <ul>
+                            <li>Age <60</li>
+                            <li>Triple Negative status</li>
+                            <li>South Asian ethnicity (higher prevalence in some groups)</li>
+                        </ul>
+                        <p><strong>If positive:</strong> May influence future surgery (e.g. bilateral mastectomy), family screening</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prognosis Tab -->
+            <div class="tab-content" id="prognosis">
+                <h2>📈 Prognosis and Outcome Considerations</h2>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Factor</th>
+                            <th>Impact on Prognosis</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Early Stage (II)</strong></td>
+                            <td>✅ Potentially curable with full treatment</td>
+                        </tr>
+                        <tr>
+                            <td><strong>No metastasis on CT</strong></td>
+                            <td>✅ Very favourable</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Grade III</strong></td>
+                            <td>⚠️ More aggressive, but responds better to chemo</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Triple Negative subtype</strong></td>
+                            <td>⚠️ Higher early recurrence risk, but chemo-sensitive</td>
+                        </tr>
+                        <tr>
+                            <td><strong>BRCA-negative (if confirmed)</strong></td>
+                            <td>✅ Lower long-term risk of second cancers</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Good response to chemo</strong></td>
+                            <td>✅ Excellent predictor of long-term disease control</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="alert alert-info">
+                    <h4>📉 Recurrence Risk Information</h4>
+                    <ul>
+                        <li>Highest within first 2–3 years</li>
+                        <li>Regular monitoring (scans, clinical reviews) is essential</li>
+                        <li>If disease remains clear beyond 5 years, long-term prognosis improves greatly</li>
+                    </ul>
+                </div>
+
+                <div class="alert alert-success">
+                    <h4>🎯 Key Considerations</h4>
+                    <ul>
+                        <li>This is a treatable and curable case of breast cancer.</li>
+                        <li>Treatment plan is aligned with NICE guidelines (UK) and international best practices.</li>
+                        <li>Early detection and clear CT scan are strong positive indicators.</li>
+                        <li>Emotional well-being, nutritional health, and family support will play a vital role in recovery.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Timeline Tab -->
+            <div class="tab-content" id="timeline">
+                <h2>⏰ Visual Treatment Timeline</h2>
+
+                <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                        <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 12px;">
+                            <div style="font-size: 2.5em; margin-bottom: 10px;">🧪</div>
+                            <h4>Chemotherapy</h4>
+                            <p style="font-size: 1.5em; font-weight: bold;">~6 months</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 40%;"></div>
+                            </div>
+                        </div>
+                        <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%); color: white; border-radius: 12px;">
+                            <div style="font-size: 2.5em; margin-bottom: 10px;">🏥</div>
+                            <h4>Surgery</h4>
+                            <p style="font-size: 1.5em; font-weight: bold;">1-2 days</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 60%;"></div>
+                            </div>
+                        </div>
+                        <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border-radius: 12px;">
+                            <div style="font-size: 2.5em; margin-bottom: 10px;">⚡</div>
+                            <h4>Radiotherapy</h4>
+                            <p style="font-size: 1.5em; font-weight: bold;">3 weeks</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                        <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; border-radius: 12px;">
+                            <div style="font-size: 2.5em; margin-bottom: 10px;">🔬</div>
+                            <h4>Genetic Testing</h4>
+                            <p style="font-size: 1.5em; font-weight: bold;">1-2 weeks</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Stage</th>
+                                <th>Duration</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Chemotherapy</strong></td>
+                                <td>~6 months</td>
+                                <td>Monitor for shrinkage mid-way</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Surgery</strong></td>
+                                <td>1–2 days (plus 2–4 weeks recovery)</td>
+                                <td>Lumpectomy or mastectomy + lymph node removal</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Radiotherapy</strong></td>
+                                <td>3 weeks</td>
+                                <td>Daily sessions</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Genetic Testing</strong></td>
+                                <td>1–2 weeks</td>
+                                <td>Blood test; influences surgery plan if positive</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Monitoring Phase</strong></td>
+                                <td>Ongoing (every 3–6 months)</td>
+                                <td>For 2–3 years, then annually</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Simplified for Family Tab -->
+            <div class="tab-content" id="simplified">
+                <h2>👶 Simple Explanation for Children and Family</h2>
+
+                <div class="simplified-card">
+                    <h3>🌟 What's happening with Saima?</h3>
+                    <p style="font-size: 1.1em; margin-bottom: 15px;">Saima has some cells in her body that aren't behaving properly. These are called cancer cells, and they're in her breast. The good news is that doctors know exactly how to help her get better!</p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 30px 0;">
+                    <div style="background: #e8f5e8; padding: 25px; border-radius: 15px; border-left: 5px solid #4caf50;">
+                        <h4 style="color: #2e7d32; margin-bottom: 15px;">🧪 Step 1: Medicine Time</h4>
+                        <p>Saima will get special medicine through a small tube. This medicine is really good at finding the bad cells and making them go away. It takes about 6 months.</p>
+                        <p><strong>What to expect:</strong> Saima might feel tired and her hair might fall out, but it will grow back even prettier!</p>
+                    </div>
+
+                    <div style="background: #e3f2fd; padding: 25px; border-radius: 15px; border-left: 5px solid #2196f3;">
+                        <h4 style="color: #1565c0; margin-bottom: 15px;">🏥 Step 2: Doctor's Fix</h4>
+                        <p>After the medicine works, doctors will do a small operation to take out any remaining bad cells. It's like cleaning up after the medicine did most of the work!</p>
+                        <p><strong>What to expect:</strong> Saima will sleep during this and wake up feeling sore, but much better.</p>
+                    </div>
+
+                    <div style="background: #fff3e0; padding: 25px; border-radius: 15px; border-left: 5px solid #ff9800;">
+                        <h4 style="color: #e65100; margin-bottom: 15px;">⚡ Step 3: Special Light Treatment</h4>
+                        <p>Finally, Saima will get special invisible light treatment that makes sure all the bad cells are gone. She goes every day for 3 weeks, like going to school!</p>
+                        <p><strong>What to expect:</strong> It doesn't hurt at all - it's like getting an invisible suntan that only the doctors can see.</p>
+                    </div>
+                </div>
+
+                <div class="alert alert-success">
+                    <h4>💚 How can we help Saima?</h4>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li>🤗 Give her lots of hugs and tell her we love her</li>
+                        <li>🎨 Make her cards and drawings to cheer her up</li>
+                        <li>🍲 Help make her favorite healthy foods</li>
+                        <li>📚 Read stories together or watch movies</li>
+                        <li>🌟 Remember that she's very brave and the doctors are excellent</li>
+                        <li>😊 Keep being your normal, happy selves around her</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px; border-radius: 15px; text-align: center;">
+                    <h3>🌈 The Most Important Thing to Remember</h3>
+                    <p style="font-size: 1.2em; margin: 0;">The doctors caught this early and they have a really good plan. Most people who have what Saima has get completely better and live normal, happy lives. Saima is strong, and she has all of us to support her!</p>
+                </div>
+            </div>
+
+            <!-- Questions Tab -->
+            <div class="tab-content" id="questions">
+                <h2>❓ Questions for the Oncology Team</h2>
+
+                <div class="question-list">
+                    <h4>🔬 About the Diagnosis</h4>
+                    <ul>
+                        <li>Can you explain exactly what Triple Negative means in simple terms?</li>
+                        <li>What are the specific genetic markers that were tested?</li>
+                        <li>How confident are you in the staging as Stage II?</li>
+                        <li>What do the Grade III characteristics mean for treatment response?</li>
+                        <li>Should we be concerned about the 2 positive lymph nodes?</li>
+                    </ul>
+                </div>
+
+                <div class="question-list">
+                    <h4>💊 About Chemotherapy</h4>
+                    <ul>
+                        <li>What are the exact names and doses of the chemotherapy drugs?</li>
+                        <li>How will you monitor if the chemotherapy is working?</li>
+                        <li>What specific side effects should we watch for at home?</li>
+                        <li>How can we best manage nausea and fatigue?</li>
+                        <li>Are there any foods or activities to avoid during treatment?</li>
+                        <li>What signs should prompt us to contact you immediately?</li>
+                        <li>Will fertility be affected, and are there preservation options?</li>
+                    </ul>
+                </div>
+
+                <div class="question-list">
+                    <h4>🏥 About Surgery</h4>
+                    <ul>
+                        <li>How will you decide between lumpectomy and mastectomy?</li>
+                        <li>What is involved in the axillary lymph node clearance?</li>
+                        <li>What are the risks and potential complications?</li>
+                        <li>How long will recovery take, and what support is needed?</li>
+                        <li>Will reconstruction be possible if mastectomy is required?</li>
+                        <li>What will the follow-up care involve after surgery?</li>
+                    </ul>
+                </div>
+
+                <div class="question-list">
+                    <h4>⚡ About Radiotherapy</h4>
+                    <ul>
+                        <li>What areas will be treated with radiation?</li>
+                        <li>What side effects should we expect, and how long do they last?</li>
+                        <li>Are there any skin care recommendations during treatment?</li>
+                        <li>Will there be any long-term effects from radiation?</li>
+                    </ul>
+                </div>
+
+                <div class="question-list">
+                    <h4>🧬 About Genetic Testing</h4>
+                    <ul>
+                        <li>Which specific genes will be tested (BRCA1, BRCA2, others)?</li>
+                        <li>How long will results take, and when will we discuss them?</li>
+                        <li>If positive, what additional treatments or surgeries might be recommended?</li>
+                        <li>Should other family members be tested if results are positive?</li>
+                        <li>How will genetic results affect the current treatment plan?</li>
+                    </ul>
+                </div>
+
+                <div class="question-list">
+                    <h4>📈 About Prognosis and Follow-up</h4>
+                    <ul>
+                        <li>What is the specific survival rate for someone with Saima's exact diagnosis?</li>
+                        <li>How often will follow-up appointments and scans be needed?</li>
+                        <li>What symptoms should we watch for that might indicate recurrence?</li>
+                        <li>Are there lifestyle changes that could improve outcomes?</li>
+                        <li>What support services are available (nutrition, counseling, support groups)?</li>
+                        <li>When would you consider the treatment completely successful?</li>
+                    </ul>
+                </div>
+
+                <div class="question-list">
+                    <h4>🏠 About Practical Matters</h4>
+                    <ul>
+                        <li>What accommodations might be needed at work during treatment?</li>
+                        <li>Are there any travel restrictions during treatment?</li>
+                        <li>What insurance or financial support resources are available?</li>
+                        <li>How can family members best support Saima through this?</li>
+                        <li>Are there clinical trials that might be appropriate?</li>
+                        <li>Who should we contact outside of office hours for urgent concerns?</li>
+                    </ul>
+                </div>
+
+                <div class="alert alert-info">
+                    <h4>💡 Tips for Your Appointment</h4>
+                    <ul>
+                        <li>Bring a notebook and pen to write down answers</li>
+                        <li>Consider bringing a family member or friend for support</li>
+                        <li>Ask to record important discussions if allowed</li>
+                        <li>Don't hesitate to ask the doctor to repeat or explain anything</li>
+                        <li>Request written information about your specific treatment plan</li>
+                        <li>Ask for contact information for your care team</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons and contents
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+
+                    // Add active class to clicked button and corresponding content
+                    button.classList.add('active');
+                    const tabId = button.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+
+            // Print functionality
+            function printReport() {
+                window.print();
+            }
+
+            // Add print button to header if needed
+            const header = document.querySelector('.header');
+            const printBtn = document.createElement('button');
+            printBtn.innerHTML = '🖨️ Print Report';
+            printBtn.style.cssText = `
+                background: rgba(255,255,255,0.2);
+                border: 2px solid rgba(255,255,255,0.3);
+                color: white;
+                padding: 10px 20px;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 1rem;
+                margin-top: 15px;
+                transition: all 0.3s ease;
+            `;
+            printBtn.addEventListener('click', printReport);
+            printBtn.addEventListener('mouseover', () => {
+                printBtn.style.background = 'rgba(255,255,255,0.3)';
+            });
+            printBtn.addEventListener('mouseout', () => {
+                printBtn.style.background = 'rgba(255,255,255,0.2)';
+            });
+            header.appendChild(printBtn);
+        });
+    </script>
+</body>
+</html>
